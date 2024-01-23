@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Menu from "./components/Menu";
+import Posts from "./components/Posts";
+import Right from "./components/Right";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="/menu" element={<Menu />}></Route>
+            <Route path="/posts" element={<Posts />}></Route>
+            <Route path="/right" element={<Right />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </QueryClientProvider>
   );
 }
 
